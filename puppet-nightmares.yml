@@ -1,0 +1,11 @@
+name: Puppet Nightmares
+game_slug: puppet-nightmares
+version: Web
+slug: puppet-nightmares
+runner: web
+year: 2009
+description: web launcher for puppet nightmares
+
+script:
+    game:
+        main_file: https://www.puppetnightmares.com/

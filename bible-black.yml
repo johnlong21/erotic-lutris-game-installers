@@ -1,0 +1,36 @@
+name: Bible Black
+game_slug: bible-black
+version: CD
+slug: bible-black-cd
+runner: wine
+year: 2000
+description: Installation of CD version from abandonware. NOTE: to get music to play you either need a midi player such as timidity++ or fluidsynth and a soundfont or the gm.dls from windows placed in "/windows/system32/drivers/"
+
+script:
+    game:
+        exe: $GAMEDIR/drive_c/Program Files/BBLACK/BBLACK.EXE
+        prefix: $GAMEDIR
+        arch: win32
+        working_dir: $GAMEDIR/drive_c/Program Files/BBLACK/
+    installer:
+        - task:
+            name: create_prefix
+            prefix: $GAMEDIR
+        - insert-disc:
+            description: Insert disc
+            requires: setup.exe
+        - task:
+            executable: $DISC/setup.exe
+            description: when installing select the maximum install
+            name: wineexec
+            prefix: $GAMEDIR
+        - task:
+            name: winetricks
+            app: dsound dmusic
+            silent: true
+    wine:
+        Desktop: true
+        dxvk: true
+        overrides:
+        system:
+            env: LANG=ja_JP.UTF-8
